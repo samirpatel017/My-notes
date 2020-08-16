@@ -54,15 +54,17 @@ module.exports.homepost=function(req,res){
 //delete data in database
 module.exports.deletetodo=function(req,res){
     
-        // let id =  homeJs.deleteFunc;
-        // console.log(id)
-        // Todo.findByIdAndDelete(id,(err) => {
-        //     if (err) {
-        //         console.log('spmething went wrong')
-        //         return;
-        //     }
-          
-            return res.redirect('back');
-        // });
+        let id = req.body.checked;
+        for(let i=0;i<=id.length; i++){
+            Todo.findByIdAndDelete(id,(err) => {
+                    if (err) {
+                        console.log('error in deleting')
+                        return;
+                    }
+                });
+                return res.redirect('back');
+              
+        }
+
 };
 

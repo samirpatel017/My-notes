@@ -7,5 +7,5 @@ const homeController= require('../controllers/home_controller')
 //router for home page
 router.get('/',homeController.home);
 router.post('/create-todo',homeController.homepost);
-router.get('/delete-notes',homeController.deletetodo);
+router.post('/delete-notes',homeController.deletetodo);
 module.exports=router;

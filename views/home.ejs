@@ -1,75 +1,85 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="https://kit.fontawesome.com/9f9910fa49.js" crossorigin="anonymous"></script>
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/home.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
     <title><%=title%></title>
-  </head>
-  <body>
- <div class="container bg-light d-flex align-items-center flex-column justify-content-center">
-    <h1 class="display-4 text-center">TO-DO APP</h1>
-    
-    <form action="/create-todo" method="post">
-        <div class="row">
-            <div class="col-12 border border-dark border-bottom-0 border-left-0 border-right-0 p-3">
-                <div class="form-group ">
-                    <label for="discription">DESCRIPTION</label>
-                    <input type="text" class="form-control " id="description"  name="description" placeholder="What do you need to do?" required>
+</head>
+
+<body>
+    <div class="container bg-light d-flex align-items-center flex-column justify-content-center">
+        <h1 class="display-4 text-center">TO-DO APP</h1>
+
+        <form action="/create-todo" method="post">
+            <div class="row">
+                <div class="col-12 border border-dark border-bottom-0 border-left-0 border-right-0 p-3">
+                    <div class="form-group ">
+                        <label for="discription">DESCRIPTION</label>
+                        <input type="text" class="form-control " id="description" name="description"
+                            placeholder="What do you need to do?" required>
+                    </div>
+                </div>
+                <div
+                    class="col-6 border border-dark border-left-0 border-right-0 d-flex align-items-center flex-column">
+                    <label for="discription">CATEGORY</label>
+                    <select class="form-control" aria-placeholder="Choose a Category" name="category" required>
+                        <option value="personal">Personal</option>
+                        <option value="school">School</option>
+                        <option value="collage">Collage</option>
+                        <option value="home">Home</option>
+                        <option value="office">Office</option>
+                    </select>
+                </div>
+                <div class="col-6 border border-dark border-right-0">
+                    <div class="form-group">
+                        <label for="date">DUE DATE</label>
+                        <input type="date" class="form-control" id="date" name="date" placeholder="Enter date" required>
+                    </div>
+                </div>
+                <div class="col-12 d-flex align-items-center justify-content-center my-2  form_btn">
+                    <button class="btn  btn-dark  btn-lg " type="submit" id="addBtn"> <i class="fas fa-plus"> ADD</i>
+                    </button>
                 </div>
             </div>
-            <div class="col-6 border border-dark border-left-0 border-right-0 d-flex align-items-center flex-column">
-                <label for="discription">CATEGORY</label>
-                <select class="form-control" aria-placeholder="Choose a Category" name="category" required>
-                    <option value="personal">Personal</option>
-                    <option value="school">School</option>
-                    <option value="collage">Collage</option>
-                    <option value="home">Home</option>
-                    <option value="office">Office</option>
-                  </select>
-            </div>
-            <div class="col-6 border border-dark border-right-0">
-                <div class="form-group">
-                    <label for="date">DUE DATE</label>
-                    <input type="date" class="form-control" id="date" name="date" placeholder="Enter date" required>
-                </div>
-            </div>
-            <div class="col-12 d-flex align-items-center justify-content-center my-2  form_btn">
-                <button class="btn  btn-dark  btn-lg " type="submit" id="addBtn">  <i class="fas fa-plus"> ADD</i> </button>      
-            </div>
-        </div>
-    </form>
-    
+        </form>
 
-    <button class="btn btn-danger delete-contact btn-lg my-2">
-        <a href="/delete-notes?">
-            <i class="fas fa-trash-alt"> DELETE</i>
-        </a>
-    </button>
-   
 
- </div>
 
- <div class="container border-top border-dark border-top">
-    <table class="table table-striped">
-        <tbody>
-            <% for (let i of todo_list){%>
-            <tr>
-                <th scope="row"><div class="form-check">
-                    <input class="form-check-input position-static checked" name="id" type="checkbox" value="<%=i._id%>" >
-                </div></th>
-                <td><b><%=i.description%></b></td>
-                <td name="date"><i class="far fa-calendar-alt" ></i> <%=i.date.toDateString()%></td>
 
-                <td class="<%=i.category%> text-center"><b><%=i.category%></b></td>
-              </tr>
-              <%}%>
+    </div>
+
+    <div class="container border-top border-dark border-top">
+        <table class="table table-striped">
+            <tbody>
+                <form method="POST" action="/delete-notes">
+                    <% for (let i of todo_list){%>
+                    <tr>
+                        <th scope="row">
+                            <div class="form-check">
+                                <input class="form-check-input position-static " name="checked" type="checkbox"
+                                    value="<%=i._id%>">
+                            </div>
+                        </th>
+                        <td><b><%=i.description%></b></td>
+                        <td name="date"><i class="far fa-calendar-alt"></i> <%=i.date.toDateString()%></td>
+
+                        <td class="<%=i.category%> text-center"><b><%=i.category%></b></td>
+                    </tr>
+                    <%}%>
+                    <button class="btn btn-danger delete-contact btn-lg my-2">
+                            <i class="fas fa-trash-alt"> DELETE</i>
+                    </button>
+            </form>
         </tbody>
     </table>
  </div>
