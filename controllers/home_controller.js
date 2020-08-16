@@ -1,25 +1,25 @@
 const Todo = require("../models/todo");
 
+//todoList before connect to database
+/*
 todoList=[
     {
         description:"sfjksndfnsdjf",
         category:'right',
         date:'17-08-2000'
-
     },
     {
         description:"sfjksndfnsdjf",
         category:'right',
         date:'17-08-2000'
-
     },
     {
         description:"sfjksndfnsdjf",
         category:'right',
         date:'17-08-2000'
-
     }
 ]
+*/
 
 //function for home page
 module.exports.home=function(req,res){
@@ -54,17 +54,22 @@ module.exports.homepost=function(req,res){
 //delete data in database
 module.exports.deletetodo=function(req,res){
     
-        let id = req.body.checked;
-        for(let i=0;i<=id.length; i++){
-            Todo.findByIdAndDelete(id,(err) => {
-                    if (err) {
-                        console.log('error in deleting')
-                        return;
-                    }
-                });
-                return res.redirect('back');
-              
+    //if no element selected for delete it will return
+
+
+let id = req.body.checked;
+console.log(id);
+if(id===undefined){
+    return  res.redirect('back');
+    }
+           
+id.forEach(element => {
+    Todo.findByIdAndDelete(id,(err) => {
+        if (err) {
+            console.log('error in deleting');
+            return;
         }
-
+    });  
+});
+return res.redirect('back');
 };
-

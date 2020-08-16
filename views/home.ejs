@@ -17,22 +17,25 @@
 </head>
 
 <body>
-    <div class="container bg-light d-flex align-items-center flex-column justify-content-center">
-        <h1 class="display-4 text-center">TO-DO APP</h1>
+    <div class="container bg-light my-3 ">
+        <h1 class="display-4 text-center"><i class="far fa-calendar-check"></i> TO-DO APP</h1>
+
+        <!-- ********************Create Todo list ********************** -->
 
         <form action="/create-todo" method="post">
             <div class="row">
                 <div class="col-12 border border-dark border-bottom-0 border-left-0 border-right-0 p-3">
                     <div class="form-group ">
                         <label for="discription">DESCRIPTION</label>
-                        <input type="text" class="form-control " id="description" name="description"
-                            placeholder="What do you need to do?" required>
+                        <input type="text" class="form-control border-0 shadow-none bg-light" id="description"
+                            name="description" placeholder="What do you need to do?" required>
                     </div>
                 </div>
                 <div
                     class="col-6 border border-dark border-left-0 border-right-0 d-flex align-items-center flex-column">
-                    <label for="discription">CATEGORY</label>
-                    <select class="form-control" aria-placeholder="Choose a Category" name="category" required>
+                    <label for="discription" class="mr-auto">CATEGORY</label>
+                    <select class="form-control border-0 shadow-none bg-light" placeholder="Choose a Category"
+                        name="category" required>
                         <option value="personal">Personal</option>
                         <option value="school">School</option>
                         <option value="collage">Collage</option>
@@ -43,52 +46,70 @@
                 <div class="col-6 border border-dark border-right-0">
                     <div class="form-group">
                         <label for="date">DUE DATE</label>
-                        <input type="date" class="form-control" id="date" name="date" placeholder="Enter date" required>
+                        <input type="date" class="form-control border-0 shadow-none bg-light" id="date" name="date"
+                            placeholder="Enter date" required>
                     </div>
                 </div>
                 <div class="col-12 d-flex align-items-center justify-content-center my-2  form_btn">
-                    <button class="btn  btn-dark  btn-lg " type="submit" id="addBtn"> <i class="fas fa-plus"> ADD</i>
+                    <button class="btn  btn-dark  btn-lg " type="submit" id="addBtn"><i class="fas fa-plus"> ADD</i>
                     </button>
                 </div>
             </div>
         </form>
 
+        <!-- ********************to-do list of details********************** -->
+
+        <div class="container-fluid p-0 m-0  border-bottom border-dark ">
+            <table class="table table-striped">
+                <form method="POST" action="/delete-notes">
+
+                    <thead class="thead ">
+                        <tr>
+                            <th scope="col">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input position-static" name="allcheck"
+                                        id="allcheck">
+                                </div>
+                            </th>
+                            <th scope="col">Description</th>
+                            <th scope="col ">Date</th>
+                            <th scope="col " class="text-center">Category</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
 
+                        <% for (let i of todo_list){%>
+                        <tr class="tr_animate">
+                            <th scope="row">
+                                <div class="form-check">
+                                    <input class="form-check-input position-static checkedtodo" name="checked"
+                                        type="checkbox" value="<%=i._id%>">
+                                </div>
+                            </th>
+                            <td><b><%=i.description%></b></td>
+                            <td name="date "><i class="far fa-calendar-alt text-center"></i> <%=i.date.toDateString()%>
+                            </td>
+                            <td class="<%=i.category%> text-center"></td>
+                        </tr>
+                        <%}%>
+                        <div class=" bg-light  border-bottom border-dark delete">
+                            <button class="btn btn-danger delete-contact btn-lg my-2 d-block mx-auto">
+                                <i class="fas fa-trash-alt"> DELETE</i>
+                            </button>
+                        </div>
+                    </tbody>
+                </form>
+        </table>
+        </div>
 
     </div>
 
-    <div class="container border-top border-dark border-top">
-        <table class="table table-striped">
-            <tbody>
-                <form method="POST" action="/delete-notes">
-                    <% for (let i of todo_list){%>
-                    <tr>
-                        <th scope="row">
-                            <div class="form-check">
-                                <input class="form-check-input position-static " name="checked" type="checkbox"
-                                    value="<%=i._id%>">
-                            </div>
-                        </th>
-                        <td><b><%=i.description%></b></td>
-                        <td name="date"><i class="far fa-calendar-alt"></i> <%=i.date.toDateString()%></td>
-
-                        <td class="<%=i.category%> text-center"><b><%=i.category%></b></td>
-                    </tr>
-                    <%}%>
-                    <button class="btn btn-danger delete-contact btn-lg my-2">
-                            <i class="fas fa-trash-alt"> DELETE</i>
-                    </button>
-            </form>
-        </tbody>
-    </table>
- </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-
     <script src="/js/home.js"></script>
-  </body>
+</body>
 </html>
