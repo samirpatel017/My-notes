@@ -1,0 +1,17 @@
+.outline{
+    outline: none!important;
+}
+.delete-contact{
+
+}
+.delete-contact a i{
+    margin: 0px 20px;
+    color:white;
+}
+.form_btn button,.delete-contact{
+    height: 70px;
+    width:200px;
+    margin: 0px 4px;
+    border-radius: 0px;
+    font-size: 20px;
+}
