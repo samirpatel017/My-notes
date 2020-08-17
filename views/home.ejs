@@ -57,6 +57,10 @@
             </div>
         </form>
 
+        <form class="form-inline my-2 my-lg-0 d-flex justify-content-center py-3">
+            <input class="form-control mr-sm-2 " id="searchTxt" type="search" placeholder="Search By Category" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
         <!-- ********************to-do list of details********************** -->
 
         <div class="container-fluid p-0 m-0  border-bottom border-dark ">
@@ -80,7 +84,7 @@
 
 
                         <% for (let i of todo_list){%>
-                        <tr class="tr_animate">
+                        <tr class="tr_animate d-grid">
                             <th scope="row">
                                 <div class="form-check">
                                     <input class="form-check-input position-static checkedtodo" name="checked"
@@ -90,7 +94,7 @@
                             <td><b><%=i.description%></b></td>
                             <td name="date "><i class="far fa-calendar-alt text-center"></i> <%=i.date.toDateString()%>
                             </td>
-                            <td class="<%=i.category%> text-center"></td>
+                            <td class="<%=i.category%> text-center cati"></td>
                         </tr>
                         <%}%>
                         <div class=" bg-light  border-bottom border-dark delete">
