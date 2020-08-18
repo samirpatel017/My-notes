@@ -12,11 +12,12 @@ const TodoSchema = new mongoose.Schema({
     },
     date: {
         type:Date,
-        required:true
-        
+        required:true,
+       
     }
   });
 
   const Todo=mongoose.model('Todo',TodoSchema);
 
+  //export todo 
   module.exports = Todo;
