@@ -60,7 +60,7 @@ module.exports.deletetodo = function (req, res) {
     if (id === undefined) {
         return res.redirect('back');
     }
-for(let i=0; i<=id.length;i++){
+    for (let i = 0; i <= id.length; i++) {
         Todo.findByIdAndDelete(id, (err) => {
             if (err) {
                 console.log('error in deleting');
